@@ -15,9 +15,9 @@
         :mobile-arrows="true"
         class="bg-white text-primary"
       >
-        <q-tab name="perfil" icon="o_person" label="Perfil" />
-        <q-tab name="alimentos" icon="o_restaurant" label="Alimentos" />
-        <q-tab name="plan" icon="o_format_list_bulleted" label="Plan" />
+        <q-route-tab to="/perfil" exact name="perfil" icon="o_person" label="Perfil" />
+        <q-route-tab to="/alimentos" exact name="alimentos" icon="o_restaurant" label="Alimentos" />
+        <q-route-tab to="/plan" exact name="plan" icon="o_format_list_bulleted" label="Plan" />
       </q-tabs>
     </q-footer>
   </q-layout>

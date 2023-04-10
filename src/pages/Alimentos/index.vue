@@ -1,10 +1,7 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <h3>Main</h3>
-
+    <h4>PAGE ALIMENTOS</h4>
   </q-page>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
