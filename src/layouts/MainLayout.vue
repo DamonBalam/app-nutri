@@ -1,8 +1,11 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header>
       <q-toolbar class="bg-white text-primary">
-        <q-toolbar-title> Natalia Segura </q-toolbar-title>
+        <!-- <q-toolbar-title> Natalia Segura </q-toolbar-title> -->
+        <div class="q-pt-md q-pl-md">
+          <q-img src="../assets/logo.png" width="150px" fit="cover"/>
+        </div>
       </q-toolbar>
     </q-header>
 
