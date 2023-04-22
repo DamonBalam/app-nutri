@@ -1,4 +1,6 @@
 import { route } from 'quasar/wrappers';
+import { useAuthStore } from 'stores/auth'
+import { LocalStorage } from 'quasar'
 import {
   createMemoryHistory,
   createRouter,
@@ -33,16 +35,23 @@ export default route(function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.requiresAuth)) {
-      if (localStorage.getItem("access_token")) {
-        next();
+    const access_token = LocalStorage.getItem('access_token')
+    const user = JSON.parse(LocalStorage.getItem('user') || '{}')
+    const store = useAuthStore()
+
+    const { setUser } = store
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (access_token != null) {
+        setUser({ user: user, token: access_token })
+        next()
       } else {
-        next({ path: "/login" });
+        next({ path: '/login' })
       }
     } else {
-      next();
+      next()
     }
-  });
+  })
 
   return Router;
 });

@@ -2,7 +2,7 @@
   <div>
     <q-form class="q-gutter-md q-mx-xl" @submit="handleSubmit">
       <div class="q-mb-none row justify-center">
-        <label for="email"  style="font-size: 18px;">Correo electrónico</label>
+        <label for="email" style="font-size: 18px">Correo electrónico</label>
       </div>
       <q-input
         id="email"
@@ -17,7 +17,7 @@
         </template>
       </q-input>
       <div class="q-mt-md row justify-center">
-        <label for="password" style="font-size: 18px;">Contraseña</label>
+        <label for="password" style="font-size: 18px">Contraseña</label>
       </div>
       <q-input
         id="password"
@@ -51,18 +51,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useAuthStore } from 'stores/auth'
+
+const store = useAuthStore()
+
+const { login } = store
+
 const usuario = ref('')
 const password = ref('')
 const accept = ref(false)
-const router = useRouter()
+
 function handleSubmit () {
-  if (usuario.value === 'admin' && password.value === 'admin') {
-    localStorage.setItem('access_token', '123456789')
-    router.push('/perfil')
-  } else {
-    alert('Usuario o contraseña incorrectos')
-  }
+  login({ email: usuario.value, password: password.value })
 }
 </script>
 

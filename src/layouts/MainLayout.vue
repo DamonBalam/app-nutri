@@ -4,7 +4,12 @@
       <q-toolbar class="bg-white text-primary">
         <!-- <q-toolbar-title> Natalia Segura </q-toolbar-title> -->
         <div class="q-pt-md q-pl-md">
-          <q-img src="../assets/logo.png" width="150px" fit="cover"/>
+          <q-img
+            src="../assets/logo.png"
+            width="150px"
+            fit="cover"
+
+          />
         </div>
       </q-toolbar>
     </q-header>
@@ -12,15 +17,29 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer class="" style="border-top: 1px solid #fefefe;">
-      <q-tabs
-        v-model="tab"
-        :mobile-arrows="true"
-        class="bg-white text-primary"
-      >
-        <q-route-tab to="/perfil" exact name="perfil" icon="o_person" label="Perfil" />
-        <q-route-tab to="/alimentos" exact name="alimentos" icon="o_restaurant" label="Alimentos" />
-        <q-route-tab to="/plan" exact name="plan" icon="o_format_list_bulleted" label="Plan" />
+    <q-footer class="" style="border-top: 1px solid #fefefe">
+      <q-tabs v-model="tab" :mobile-arrows="true" class="bg-white text-primary">
+        <q-route-tab
+          to="/perfil"
+          exact
+          name="perfil"
+          icon="o_person"
+          label="Perfil"
+        />
+        <q-route-tab
+          to="/alimentos"
+          exact
+          name="alimentos"
+          icon="o_restaurant"
+          label="Alimentos"
+        />
+        <q-route-tab
+          to="/plan"
+          exact
+          name="plan"
+          icon="o_format_list_bulleted"
+          label="Plan"
+        />
       </q-tabs>
     </q-footer>
   </q-layout>
