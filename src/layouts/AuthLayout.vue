@@ -1,8 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-img src="../assets/fondo.jpg" style="max-width: 100vw; height: 30vh;" fit="fill"/>
-    <div class="row justify-center q-my-xl">
-      <q-img src="../assets/logo.png" width="200px" fit="cover"/>
+    <q-img src="../assets/fondo.jpg" style="max-width: 100vw; height: 25vh;" fit="fill"/>
+    <div class="row justify-center q-my-lg">
+      <q-img src="../assets/logo2.png" width="200px" fit="cover"/>
     </div>
 
     <q-page-container>

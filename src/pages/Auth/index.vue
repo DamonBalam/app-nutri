@@ -21,7 +21,7 @@
           <q-icon name="o_email" />
         </template>
       </q-input>
-      <div class="q-mt-md row justify-center">
+      <div class="q-mt-sm row justify-center">
         <label for="password" style="font-size: 18px">Contraseña</label>
       </div>
       <q-input

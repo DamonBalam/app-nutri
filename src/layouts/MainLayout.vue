@@ -55,6 +55,11 @@
 
             <q-item-section> Cerrar Sesión </q-item-section>
           </q-item>
+
+          <div class="absolute-bottom text-center" style="height: 200px;">
+            <q-img src="../assets/logo2.png" style="width: 180px" />
+            <div class="text-weight-bold">2023 - v0.1</div>
+          </div>
         </q-list>
       </q-scroll-area>
 
