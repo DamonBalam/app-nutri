@@ -20,6 +20,21 @@
     <div class="q-my-md q-px-xs" v-if="search.length > 2">
       <q-list bordered separator>
         <q-item
+          class="bg-white text-black"
+          v-for="item in itemsFiltered"
+          :key="item.id"
+        >
+          <q-item-section>
+            <q-item-label>{{ item.nombre }}</q-item-label>
+            <q-item-label caption
+              >{{ item.cantidad_producto }} =
+              {{ item.intercambio_nutricional }}</q-item-label
+            >
+          </q-item-section>
+        </q-item>
+      </q-list>
+      <!-- <q-list bordered separator>
+        <q-item
           clickable
           v-ripple
           class="bg-primary text-white"
@@ -41,7 +56,7 @@
             </div>
           </q-item-section>
         </q-item>
-      </q-list>
+      </q-list> -->
     </div>
     <div class="q-my-md q-px-xs" v-else>
       <q-list bordered separator v-for="(cat, i) in categories" :key="cat.id">
@@ -52,16 +67,18 @@
           class="text-white"
           @click="selectedCategory(cat)"
         >
-          <q-item-section> {{ cat.nombre }} </q-item-section>
+          <q-item-section>
+            <span class="text-bold">{{ cat.nombre }}</span>
+          </q-item-section>
           <q-item-section avatar>
             <q-icon
-              :name="cat === cat ? 'expand_more' : 'expand_less'"
-              :color="cat === cat ? 'white' : 'primary'"
+              :name="category.id === cat.id ? 'expand_less' : 'expand_more'"
+              color="white"
             />
           </q-item-section>
         </q-item>
         <template v-if="category?.id === cat.id">
-          <q-list v-for="sub in subcategories" :key="sub.id" bordered separator >
+          <q-list v-for="sub in subcategories" :key="sub.id" bordered separator>
             <q-item
               clickable
               v-ripple
@@ -69,15 +86,22 @@
               class="text-white"
               @click="selectedSubcategory(sub)"
             >
-              <q-item-section class="q-ml-md"> {{ sub.nombre }} </q-item-section>
+              <q-item-section class="q-ml-md">
+                <q-item-label>{{ sub.nombre }}</q-item-label>
+                <!-- <div class="row justify-start items-center">
+                  <span>{{ sub.nombre }}</span>
+                </div> -->
+              </q-item-section>
               <q-item-section avatar>
                 <q-icon
-                  :name="sub === sub ? 'expand_more' : 'expand_less'"
-                  :color="sub === sub ? 'white' : 'primary'"
+                  :name="
+                    subcategory.id === sub.id ? 'expand_less' : 'expand_more'
+                  "
+                  color="white"
                 />
               </q-item-section>
             </q-item>
-            <q-list bordered separator  v-if="subcategory?.id === sub.id">
+            <q-list bordered separator v-if="subcategory?.id === sub.id">
               <q-item
                 class="bg-white text-black"
                 v-for="item in itemsFilteredBySubcategory"
@@ -102,14 +126,22 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { ICategory } from '../../interfaces/Category'
+import { IProducto } from '../../interfaces/Producto'
 import { ISubcategory } from '../../interfaces/Subcategory'
 import { categoryDataServices } from '../../services/CategoryDataService'
-import { IProducto } from '../../interfaces/Producto'
 import { productoDataServices } from '../../services/ProductoDataService'
 
 const search = ref('')
-const category = ref(null)
-const subcategory = ref(null)
+const category = ref({
+  id: null,
+  nombre: '',
+  icon: ''
+})
+const subcategory = ref({
+  id: null,
+  nombre: '',
+  categoria_id: null
+})
 
 const colors = [
   '#339933',
@@ -120,6 +152,22 @@ const colors = [
   '#900020',
   '#EE890B',
   '#339933',
+  '#4195F1',
+  '#E60026',
+  '#27C1C1',
+  '#FF005A',
+  '#900020',
+  'EE890B'
+]
+const colorsSubs = [
+  '#54c654',
+  '#4195F1',
+  '#E60026',
+  '#27C1C1',
+  '#FF005A',
+  '#900020',
+  '#EE890B',
+  '#54c654',
   '#4195F1',
   '#E60026',
   '#27C1C1',
@@ -138,8 +186,16 @@ onMounted(async () => {
 
 function selectedCategory(item: any) {
   if (category.value === item) {
-    category.value = null
-    subcategory.value = null
+    category.value = {
+      id: null,
+      nombre: '',
+      icon: ''
+    }
+    subcategory.value = {
+      id: null,
+      nombre: '',
+      categoria_id: null
+    }
   } else {
     category.value = item
     getSubcategories(item.id)
@@ -148,7 +204,11 @@ function selectedCategory(item: any) {
 
 function selectedSubcategory(item: any) {
   if (subcategory.value === item) {
-    subcategory.value = null
+    subcategory.value = {
+      id: null,
+      nombre: '',
+      categoria_id: null
+    }
   } else {
     subcategory.value = item
   }
