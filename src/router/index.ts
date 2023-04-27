@@ -1,4 +1,6 @@
 import { route } from 'quasar/wrappers';
+import { useAuthStore } from 'stores/auth'
+import { LocalStorage, SessionStorage } from 'quasar'
 import {
   createMemoryHistory,
   createRouter,
@@ -31,6 +33,25 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createWebHistory(process.env.VUE_ROUTER_BASE),
   });
+
+  Router.beforeEach((to, from, next) => {
+    const access_token = SessionStorage.getItem('access_token')
+    const user = JSON.parse(SessionStorage.getItem('user') || '{}')
+    const store = useAuthStore()
+
+    const { setUser } = store
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (access_token != null) {
+        setUser({ user: user, token: access_token })
+        next()
+      } else {
+        next({ path: '/login' })
+      }
+    } else {
+      next()
+    }
+  })
 
   return Router;
 });
