@@ -4,34 +4,34 @@
     <div class="q-my-sm q-px-md">
       <div class="row justify-center">
         <span class="text-bold q-mr-sm"> Ultima actualización:</span
-        ><span class="text-light">15/01/2023</span>
+        ><span class="text-light">{{ cita.fecha_cita || '' }}</span>
       </div>
     </div>
     <div class="row q-mb-md">
       <div class="col-6">
         <q-card flat bordered class="q-mx-xs q-mb-xs text-center q-pa-md">
-          <span class="text-h6">{{ data.peso }} kg</span>
+          <span class="text-h6">{{ cita.peso }} kg</span>
           <q-separator color="black" />
           <span class="text-subtitle1">Peso</span>
         </q-card>
       </div>
       <div class="col-6">
         <q-card flat bordered class="q-mx-xs q-mb-xs text-center q-pa-md">
-          <span class="text-h6">{{ data.masa_muscular }} kg</span>
+          <span class="text-h6">{{ cita.musculo }} kg</span>
           <q-separator color="black" />
           <span class="text-subtitle1">Masa muscular</span>
         </q-card>
       </div>
       <div class="col-6">
         <q-card flat bordered class="q-mx-xs q-mb-xs text-center q-pa-md">
-          <span class="text-h6">{{ data.grasa }}kg</span>
+          <span class="text-h6">{{ cita.grasas }}kg</span>
           <q-separator color="black" />
           <span class="text-subtitle1">Grasa</span>
         </q-card>
       </div>
       <div class="col-6">
         <q-card flat bordered class="q-mx-xs q-mb-xs text-center q-pa-md">
-          <span class="text-h6">{{ data.grasa_porcentual }}%</span>
+          <span class="text-h6">{{ cita.porcentaje_grasa }}%</span>
           <q-separator color="black" />
           <span class="text-subtitle1">% Grasa</span>
         </q-card>
@@ -39,7 +39,7 @@
 
       <div class="col-6">
         <q-card flat bordered class="q-mx-xs q-mb-xs text-center q-pa-md">
-          <span class="text-h6">{{ data.cc }}</span>
+          <span class="text-h6">{{ cita.cc }}</span>
           <q-separator color="black" />
           <span class="text-subtitle1">CC</span>
         </q-card>
@@ -47,7 +47,7 @@
 
       <div class="col-6">
         <q-card flat bordered class="q-mx-xs q-mb-xs text-center q-pa-md">
-          <span class="text-h6">{{ data.grasa_visceral }}</span>
+          <span class="text-h6">{{ cita.grasa_viceral }}</span>
           <q-separator color="black" />
           <span class="text-subtitle1">Grasa visceral</span>
         </q-card>
@@ -65,47 +65,38 @@
         hide-pagination
         table-header-class="bg-black text-white"
         no-data-label="No se han encontrado registros"
+        :rows-per-page-options="[5]"
       />
     </div>
-    <!-- <q-btn
-      style="position: absolute; top: 95%; right: 30%"
-      flat
-      size="md"
-      icon="o_power_settings_new"
-      label="Cerrar Sesión"
-      class="text-bold"
-      @click="handleLogout"
-    /> -->
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import AppleTitle from 'components/AppleTitle.vue'
 import { useAuthStore } from 'stores/auth'
+import { citaControlDataServices } from '../../services/CitaControlDataService'
+import { eqNuDataService } from '../../services/EqNuDataService'
 
 const store = useAuthStore()
-const { logout } = store
+const { getUser } = store
 
-function handleLogout () {
-  logout()
-}
-const data = ref({
-  peso: 55,
-  masa_muscular: 25,
-  grasa_visceral: 2,
-  grasa: 6,
-  grasa_porcentual: 12,
-  cc: 85
+const cita = ref({
+  fecha_cita: '',
+  peso: '',
+  grasas: '',
+  porcentaje_grasa: '',
+  musculo: '',
+  cc: '',
+  grasa_viceral: ''
 })
-
 
 const columns = [
   {
-    name: 'date',
+    name: 'fecha_cita',
     label: 'Fecha',
     align: 'left',
-    field: 'date'
+    field: 'fecha_cita'
   },
   {
     name: 'peso',
@@ -113,49 +104,27 @@ const columns = [
     label: 'Peso',
     field: 'peso'
   },
-  { name: 'grasa', label: 'Grasa', field: 'grasa', align: 'center' },
+  { name: 'grasas', label: 'Grasa', field: 'grasas', align: 'center' },
   {
-    name: 'grasa_porcentual',
+    name: 'porcentaje_grasa',
     label: '% Grasa',
-    field: 'grasa_porcentual',
+    field: 'porcentaje_grasa',
     align: 'center'
   },
   {
-    name: 'masa_muscular',
+    name: 'musculo',
     label: 'Masa M.',
-    field: 'masa_muscular',
+    field: 'musculo',
     align: 'center'
   }
 ]
 
-const rows = [
-  {
-    date: '01/01/23',
-    peso: 55,
-    grasa: 6,
-    grasa_porcentual: 12,
-    masa_muscular: 25
-  },
-  {
-    date: '01/02/23',
-    peso: 55,
-    grasa: 6,
-    grasa_porcentual: 12,
-    masa_muscular: 25
-  },
-  {
-    date: '01/03/23',
-    peso: 55,
-    grasa: 6,
-    grasa_porcentual: 12,
-    masa_muscular: 25
-  },
-  {
-    date: '01/04/23',
-    peso: 55,
-    grasa: 6,
-    grasa_porcentual: 12,
-    masa_muscular: 25
-  }
-]
+const rows = ref([])
+
+onMounted(async () => {
+  const data = await citaControlDataServices.getAll(getUser.id)
+  console.log(data)
+  rows.value = data.data
+  cita.value = data.data[0]
+})
 </script>

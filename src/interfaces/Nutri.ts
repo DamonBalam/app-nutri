@@ -1,9 +1,8 @@
+import { IRole } from "./Role"
+
 export interface INutri {
-  id: number
-  name: string
-  lastname: string
-  password: string
+  id?: number
+  nombre: string
   email: string
-  telefono: string
-  fecha_nacimiento: string
+  rol: number | null
 }

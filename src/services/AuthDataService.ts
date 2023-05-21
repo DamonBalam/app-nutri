@@ -18,6 +18,11 @@ class AuthDataService {
     let response = await API.get('logout', {})
     return response
   }
+
+  async recover (email: string): Promise<IResponse<any>> {
+    let response = await API.post('recover/password', { data: { email } })
+    return response
+  }
 }
 
 export const authDataServices = new AuthDataService()

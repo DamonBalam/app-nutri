@@ -3,9 +3,8 @@ import { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/login',
-    name: 'Login',
     component: () => import('layouts/AuthLayout.vue'),
-    children: [{ path: '', component: () => import('pages/Auth/Index.vue') }]
+    children: [{ path: '', name: 'Login', component: () => import('pages/Auth/Index.vue') }]
   },
   {
     path: '/',

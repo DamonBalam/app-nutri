@@ -3,8 +3,8 @@
     <AppleTitle title="Tu Plan de alimentación saludable " />
     <div class="q-my-sm q-px-md">
       <div class="row justify-center">
-        <span class="text-bold q-mr-sm">Periodo:</span
-        ><span class="text-light">15/01/2023 - 30/01/23</span>
+        <span class="text-bold q-mr-sm">última actualización:</span
+        ><span class="text-light">{{ fecha }}</span>
       </div>
     </div>
     <div class="q-px-md">
@@ -31,9 +31,11 @@
         <template v-slot:body-cell-diet="props">
           <q-td :props="props">
             <ul>
-              <li v-for="item in props.row.diet" style="list-style: none">
-                {{ item.quantity }} {{ item.name }}
-              </li>
+              <template v-for="(item, name) in props.row.diet[0]">
+                <li style="list-style: none" v-if="item !== 0">
+                  {{ item }} {{ name }}
+                </li>
+              </template>
             </ul>
           </q-td>
         </template>
@@ -44,7 +46,14 @@
 
 <script setup lang="ts">
 import AppleTitle from 'components/AppleTitle.vue'
+import { onMounted, ref } from 'vue'
+import { eqNuDataService } from '../../services/EqNuDataService'
+import { useAuthStore } from '../../stores/auth'
+import { citaControlDataServices } from '../../services/CitaControlDataService'
+const store = useAuthStore()
+const { getUser } = store
 
+const fecha = ref('')
 const columns = [
   {
     name: 'time',
@@ -60,110 +69,56 @@ const columns = [
   }
 ]
 
-const rows = [
+const rows = ref([
   {
     time: 'Desayuno',
-    diet: [
-      {
-        name: 'Proteína',
-        quantity: '2'
-      },
-      {
-        name: 'Vegetales',
-        quantity: '1'
-      },
-      {
-        name: 'Carbohidratos',
-        quantity: '2'
-      }
-    ]
+    diet: []
   },
   {
     time: 'Media Mañana',
-    diet: [
-      {
-        name: 'Proteína',
-        quantity: '2'
-      },
-      {
-        name: 'Vegetales',
-        quantity: '1'
-      },
-      {
-        name: 'Carbohidratos',
-        quantity: '2'
-      }
-    ]
+    diet: []
   },
   {
     time: 'Almuerzo',
-    diet: [
-      {
-        name: 'Proteína',
-        quantity: '2'
-      },
-      {
-        name: 'Vegetales',
-        quantity: '1'
-      },
-      {
-        name: 'Carbohidratos',
-        quantity: '2'
-      }
-    ]
+    diet: []
   },
   {
     time: 'Media Tarde',
-    diet: [
-      {
-        name: 'Proteína',
-        quantity: '2'
-      },
-      {
-        name: 'Vegetales',
-        quantity: '1'
-      },
-      {
-        name: 'Carbohidratos',
-        quantity: '2'
-      }
-    ]
+    diet: []
   },
   {
     time: 'Cena',
-    diet: [
-      {
-        name: 'Proteína',
-        quantity: '2'
-      },
-      {
-        name: 'Vegetales',
-        quantity: '1'
-      },
-      {
-        name: 'Carbohidratos',
-        quantity: '2'
-      }
-    ]
+    diet: []
   },
   {
     time: 'Merienda Noche',
-    diet: [
-      {
-        name: 'Proteína',
-        quantity: '2'
-      },
-      {
-        name: 'Vegetales',
-        quantity: '1'
-      },
-      {
-        name: 'Carbohidratos',
-        quantity: '2'
-      }
-    ]
+    diet: []
   }
-]
+])
+
+onMounted(async () => {
+  const data = await eqNuDataService.getLast(getUser.id)
+  const data2 = await citaControlDataServices.getAll(getUser.id)
+  fecha.value = data2.data[0].fecha_cita
+
+  const desayuno = JSON.parse(data.data.desayuno)
+  rows.value[0].diet.push(desayuno)
+
+  const media_manana = JSON.parse(data.data.media_mañana)
+  rows.value[1].diet.push(media_manana)
+
+  const almuerzo = JSON.parse(data.data.almuerzo)
+  rows.value[2].diet.push(almuerzo)
+
+  const media_tarde = JSON.parse(data.data.media_tarde)
+  rows.value[3].diet.push(media_tarde)
+
+  const cena = JSON.parse(data.data.cena)
+  rows.value[4].diet.push(cena)
+
+  const merienda_noche = JSON.parse(data.data.merienda_noche)
+  rows.value[5].diet.push(merienda_noche)
+})
 </script>
 
 <style scoped lang="scss"></style>

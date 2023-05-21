@@ -1,7 +1,7 @@
 
 
 export interface IProducto {
-  id: number
+  id?: number
   nombre: string
   cantidad_producto: string
   intercambio_nutricional: string
