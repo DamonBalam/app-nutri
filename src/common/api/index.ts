@@ -141,7 +141,7 @@ const doRequest = (method: string, url: string, payload: Payload) => {
 
   // Realizamos la petición al servicio REST
   return axios({
-    baseURL: 'https://nutricionista-api.herokuapp.com/api/',
+    baseURL: process.env.API,
     url: url,
     method: method,
     data: data,

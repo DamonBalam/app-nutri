@@ -63,7 +63,9 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        API: 'https://phplaravel-1003446-3537062.cloudwaysapps.com/api/',
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

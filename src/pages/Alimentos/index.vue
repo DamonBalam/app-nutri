@@ -33,30 +33,6 @@
           </q-item-section>
         </q-item>
       </q-list>
-      <!-- <q-list bordered separator>
-        <q-item
-          clickable
-          v-ripple
-          class="bg-primary text-white"
-          v-for="Producto in itemsFiltered"
-          :key="Producto.id"
-        >
-          <q-item-section>
-            <div class="row" style="height: 80px">
-              <div class="col-5">
-                <span>{{ Producto.nombre }}</span>
-                <p class="text-subtitle2">{{ Producto.cantidad_producto }}</p>
-              </div>
-              <div class="col-2 row justify-center items-center">
-                <p class="text-h4">=</p>
-              </div>
-              <div class="col-5 row justify-center items-center">
-                <p>{{ Producto.intercambio_nutricional }}</p>
-              </div>
-            </div>
-          </q-item-section>
-        </q-item>
-      </q-list> -->
     </div>
     <div class="q-my-md q-px-xs" v-else>
       <q-list bordered separator v-for="(cat, i) in categories" :key="cat.id">
@@ -157,23 +133,10 @@ const colors = [
   '#27C1C1',
   '#FF005A',
   '#900020',
-  'EE890B'
-]
-const colorsSubs = [
-  '#54c654',
-  '#4195F1',
-  '#E60026',
-  '#27C1C1',
-  '#FF005A',
-  '#900020',
   '#EE890B',
-  '#54c654',
+  '#339933',
   '#4195F1',
   '#E60026',
-  '#27C1C1',
-  '#FF005A',
-  '#900020',
-  'EE890B'
 ]
 const items = ref<IProducto[]>([])
 const categories = ref<ICategory[]>([])
