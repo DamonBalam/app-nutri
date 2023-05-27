@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { authDataServices } from 'src/services/AuthDataService'
-import { SessionStorage } from 'quasar'
+import { LocalStorage, SessionStorage } from 'quasar'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     counter: 0,
@@ -19,8 +19,8 @@ export const useAuthStore = defineStore('auth', {
       this.token = payload.token
     },
     setLocalStorage (payload: any) {
-      SessionStorage.set('user', JSON.stringify(payload.user))
-      SessionStorage.set('access_token', payload.token)
+      LocalStorage.set('user', JSON.stringify(payload.user))
+      LocalStorage.set('access_token', payload.token)
     },
     login (payload: any) {
       this.setUser(payload)
@@ -32,8 +32,8 @@ export const useAuthStore = defineStore('auth', {
         await authDataServices.logout()
         this.user = {}
         this.token = ''
-        SessionStorage.remove('user')
-        SessionStorage.remove('access_token')
+        LocalStorage.remove('user')
+        LocalStorage.remove('access_token')
         this.router.push('/login')
       } catch (error) {
         console.log(error)
