@@ -30,6 +30,7 @@
               >{{ item.cantidad_producto }} =
               {{ item.intercambio_nutricional }}</q-item-label
             >
+            <q-item-label caption>{{ item.detalles_adicionales }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -89,6 +90,9 @@
                     >{{ item.cantidad_producto }} =
                     {{ item.intercambio_nutricional }}</q-item-label
                   >
+                  <q-item-label caption>{{
+                    item.detalles_adicionales
+                  }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -136,7 +140,7 @@ const colors = [
   '#EE890B',
   '#339933',
   '#4195F1',
-  '#E60026',
+  '#E60026'
 ]
 const items = ref<IProducto[]>([])
 const categories = ref<ICategory[]>([])
