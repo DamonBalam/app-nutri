@@ -153,9 +153,7 @@ import { authDataServices } from '../../../services/AuthDataService'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 
-onMounted(() => {
-  console.log($q)
-})
+
 
 const store = useAuthStore()
 
