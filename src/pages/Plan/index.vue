@@ -99,25 +99,30 @@ const rows = ref([
 onMounted(async () => {
   const data = await eqNuDataService.getLast(getUser.id)
   const data2 = await citaControlDataServices.getAll(getUser.id)
-  fecha.value = data2.data[0].fecha_cita
 
-  const desayuno = JSON.parse(data.data.desayuno)
-  rows.value[0].diet.push(desayuno)
+  if (data2.code === 200) {
+    fecha.value = data2.data[0].fecha_cita
+  }
 
-  const media_manana = JSON.parse(data.data.media_mañana)
-  rows.value[1].diet.push(media_manana)
+  if (data.code === 200) {
+    const desayuno = JSON.parse(data.data.desayuno)
+    rows.value[0].diet.push(desayuno)
 
-  const almuerzo = JSON.parse(data.data.almuerzo)
-  rows.value[2].diet.push(almuerzo)
+    const media_manana = JSON.parse(data.data.media_mañana)
+    rows.value[1].diet.push(media_manana)
 
-  const media_tarde = JSON.parse(data.data.media_tarde)
-  rows.value[3].diet.push(media_tarde)
+    const almuerzo = JSON.parse(data.data.almuerzo)
+    rows.value[2].diet.push(almuerzo)
 
-  const cena = JSON.parse(data.data.cena)
-  rows.value[4].diet.push(cena)
+    const media_tarde = JSON.parse(data.data.media_tarde)
+    rows.value[3].diet.push(media_tarde)
 
-  const merienda_noche = JSON.parse(data.data.merienda_noche)
-  rows.value[5].diet.push(merienda_noche)
+    const cena = JSON.parse(data.data.cena)
+    rows.value[4].diet.push(cena)
+
+    const merienda_noche = JSON.parse(data.data.merienda_noche)
+    rows.value[5].diet.push(merienda_noche)
+  }
 })
 </script>
 

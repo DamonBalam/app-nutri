@@ -30,14 +30,17 @@ export const useAuthStore = defineStore('auth', {
     async logout () {
       try {
         await authDataServices.logout()
-        this.user = {}
-        this.token = ''
-        LocalStorage.remove('user')
-        LocalStorage.remove('access_token')
-        this.router.push('/login')
+        this.deleteLocalStorage()
       } catch (error) {
         console.log(error)
       }
+    },
+    deleteLocalStorage () {
+      this.user = {}
+      this.token = ''
+      LocalStorage.remove('user')
+      LocalStorage.remove('access_token')
+      this.router.push('/login')
     }
   }
 })
