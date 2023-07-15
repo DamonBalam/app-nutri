@@ -33,14 +33,14 @@
         "
       >
         <q-list padding>
-          <!-- <q-item clickable v-ripple>
+          <q-item clickable v-ripple to="/nosotros">
             <q-item-section avatar>
               <q-icon name="o_person" />
             </q-item-section>
 
-            <q-item-section> Soporte </q-item-section>
+            <q-item-section> ¿Quiénes somos? </q-item-section>
           </q-item>
-          <q-item clickable v-ripple>
+          <!-- <q-item clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="o_person" />
             </q-item-section>
@@ -48,6 +48,13 @@
             <q-item-section> Soporte </q-item-section>
           </q-item> -->
 
+          <!-- <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="o_power_settings_new" />
+            </q-item-section>
+
+            <q-item-section> ¿Quiénes somos? </q-item-section>
+          </q-item> -->
           <q-item clickable v-ripple @click="handleLogout">
             <q-item-section avatar>
               <q-icon name="o_power_settings_new" />
@@ -72,8 +79,10 @@
           <q-avatar size="56px" class="q-mb-sm">
             <img src="../assets/avatar.png" />
           </q-avatar>
-          <div class="text-weight-bold">{{ getUser.nombre + ' ' + getUser.apellido_paterno || ''}}</div>
-          <div>{{getUser.email || ''}}</div>
+          <div class="text-weight-bold">
+            {{ getUser.nombre + ' ' + getUser.apellido_paterno || '' }}
+          </div>
+          <div>{{ getUser.email || '' }}</div>
         </div>
       </q-img>
     </q-drawer>
