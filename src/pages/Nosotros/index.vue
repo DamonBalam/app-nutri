@@ -10,12 +10,15 @@
     </p>
     <AppleTitle title="¿De qué manera lo logramos?" />
     <p class="q-mt-md q-px-md" style="text-align: justify">
-      Nuestro enfoque se fundamenta en la experiencia y la investigación
-      científica en el campo de la nutrición en general y la nutrición deportiva
-      en particular. Así, cada consulta se transforma en una sesión instructiva
-      de gran valor, sin recurrir a dietas extremas o restrictivas.
+      Nuestro enfoque se basa en la experiencia y la investigación científica en
+      varios campos de la nutrición, incluyendo la nutrición general, la
+      nutrición deportiva, la nutrición clínica y el estudio del metabolismo.
+      Además, contamos con especialistas en el manejo de enfermedades crónicas
+      no transmisibles. De esta manera, cada consulta se transforma en una
+      sesión instructiva de gran valor, evitando la necesidad de recurrir a
+      dietas extremas o restrictivas.
     </p>
-    <p class="q-mt-md q-px-md">
+    <p class="q-mt-md q-px-md" style="text-align: justify">
       Todos nuestros planes nutricionales son diseñados teniendo en cuenta las
       características fisiológicas individuales. Reconocemos que cada ser humano
       es único y que su nutrición debe ajustarse a variables como la edad,
@@ -24,15 +27,17 @@
     </p>
     <div class="flex justify-center">
       <h5 class="q-mt-md q-mb-md q-px-md">Dra. Natalia Segura Álvarez</h5>
-      <q-btn href="https://www.nutricionistacostarica.com" target="_blank" color="primary" >Más información</q-btn>
+      <q-btn
+        href="https://www.nutricionistacostarica.com"
+        target="_blank"
+        color="primary"
+        >Más información</q-btn
+      >
     </div>
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
 import AppleTitle from 'components/AppleTitle.vue'
-import { useAuthStore } from 'stores/auth'
-
-const store = useAuthStore()
 </script>
+
