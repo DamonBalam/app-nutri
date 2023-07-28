@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { authDataServices } from 'src/services/AuthDataService'
-import { LocalStorage, SessionStorage } from 'quasar'
+import { Cookies } from 'quasar'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     counter: 0,
@@ -19,12 +19,27 @@ export const useAuthStore = defineStore('auth', {
       this.token = payload.token
     },
     setLocalStorage (payload: any) {
-      LocalStorage.set('user', JSON.stringify(payload.user))
-      LocalStorage.set('access_token', payload.token)
+      /* Cookies */
+      Cookies.set('user', payload.user)
+      Cookies.set('access_token', payload.token)
+    },
+    setLocalStorageWithTime (payload: any) {
+      /* Cookies */
+      Cookies.set('user', payload.user, {
+        expires: 100
+      })
+      Cookies.set('access_token', payload.token, {
+        expires: 100
+      })
     },
     login (payload: any) {
       this.setUser(payload)
       this.setLocalStorage(payload)
+      this.router.push('/perfil')
+    },
+    loginWithCookies (payload: any) {
+      this.setUser(payload)
+      this.setLocalStorageWithTime(payload)
       this.router.push('/perfil')
     },
     async logout () {
@@ -38,8 +53,8 @@ export const useAuthStore = defineStore('auth', {
     deleteLocalStorage () {
       this.user = {}
       this.token = ''
-      LocalStorage.remove('user')
-      LocalStorage.remove('access_token')
+      Cookies.remove('user')
+      Cookies.remove('access_token')
       this.router.push('/login')
     }
   }

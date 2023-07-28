@@ -62,9 +62,9 @@
         </q-banner>
       </div>
 
-      <!-- <div class="row justify-center">
+      <div class="row justify-center">
         <q-toggle v-model="accept" label="Recordar contraseña" />
-      </div> -->
+      </div>
 
       <div class="row justify-center">
         <q-btn flat class="text-primary" @click.native="handleClick"
@@ -153,11 +153,9 @@ import { authDataServices } from '../../../services/AuthDataService'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
 
-
-
 const store = useAuthStore()
 
-const { login } = store
+const { login, loginWithCookies } = store
 
 const myForm = ref(null)
 const myFormRecovery = ref(null)
@@ -193,7 +191,11 @@ async function handleSubmit () {
         )
 
         if (code === 200) {
-          login(data)
+          if (accept.value) {
+            loginWithCookies(data)
+          } else {
+            login(data)
+          }
         } else {
           message.value = msg || 'Error al iniciar sesión'
 

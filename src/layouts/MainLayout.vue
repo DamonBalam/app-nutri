@@ -38,6 +38,13 @@
 
             <q-item-section> ¿Quiénes somos? </q-item-section>
           </q-item>
+          <q-item clickable v-ripple to="/update-password">
+            <q-item-section avatar>
+              <q-icon name="o_settings" />
+            </q-item-section>
+
+            <q-item-section> Actualizar Contraseña </q-item-section>
+          </q-item>
           <q-item clickable v-ripple @click="handleLogout">
             <q-item-section avatar>
               <q-icon name="o_power_settings_new" />
@@ -65,8 +72,7 @@
       </q-scroll-area>
 
       <q-img
-        class="absolute-top"
-        src="../assets/material.png"
+        class="absolute-top bg-primary"
         style="height: 150px"
       >
         <div class="absolute-bottom bg-transparent">

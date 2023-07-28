@@ -9,8 +9,7 @@
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build",
-    "icons": "icongenie generate -i AppIcon2.png --skip-trim --theme-color 229857 ",
-    "iconsv": "icongenie generate -i AppIcon.png --skip-trim --theme-color 229857 "
+    "icons": "icongenie generate -i logo_app.png --skip-trim --theme-color ffffff "
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
