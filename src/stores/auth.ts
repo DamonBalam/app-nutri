@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { authDataServices } from 'src/services/AuthDataService'
-import { Cookies } from 'quasar'
+import { LocalStorage } from 'quasar'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     counter: 0,
@@ -19,18 +19,22 @@ export const useAuthStore = defineStore('auth', {
       this.token = payload.token
     },
     setLocalStorage (payload: any) {
-      /* Cookies */
-      Cookies.set('user', payload.user)
-      Cookies.set('access_token', payload.token)
+      // /* Cookies */
+      // Cookies.set('user', payload.user)
+      // Cookies.set('access_token', payload.token)
+      LocalStorage.set('user', JSON.stringify(payload.user))
+      LocalStorage.set('access_token', payload.token)
     },
     setLocalStorageWithTime (payload: any) {
       /* Cookies */
-      Cookies.set('user', payload.user, {
-        expires: 100
-      })
-      Cookies.set('access_token', payload.token, {
-        expires: 100
-      })
+      // Cookies.set('user', payload.user, {
+      //   expires: 100
+      // })
+      // Cookies.set('access_token', payload.token, {
+      //   expires: 100
+      // })
+      LocalStorage.set('user', JSON.stringify(payload.user))
+      LocalStorage.set('access_token', payload.token)
     },
     login (payload: any) {
       this.setUser(payload)
@@ -53,8 +57,11 @@ export const useAuthStore = defineStore('auth', {
     deleteLocalStorage () {
       this.user = {}
       this.token = ''
-      Cookies.remove('user')
-      Cookies.remove('access_token')
+      LocalStorage.remove('user')
+      LocalStorage.remove('access_token')
+
+      // Cookies.remove('user')
+      // Cookies.remove('access_token')
       this.router.push('/login')
     }
   }

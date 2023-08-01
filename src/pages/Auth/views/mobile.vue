@@ -191,11 +191,12 @@ async function handleSubmit () {
         )
 
         if (code === 200) {
-          if (accept.value) {
-            loginWithCookies(data)
-          } else {
-            login(data)
-          }
+          loginWithCookies(data)
+          // if (accept.value) {
+          //   loginWithCookies(data)
+          // } else {
+          //   login(data)
+          // }
         } else {
           message.value = msg || 'Error al iniciar sesión'
 
