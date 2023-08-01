@@ -30,6 +30,11 @@ const routes: RouteRecordRaw[] = [
         path: '/nosotros',
         meta: { requiresAuth: true },
         component: () => import('pages/Nosotros/index.vue')
+      },
+      {
+        path: '/update-password',
+        meta: { requiresAuth: true },
+        component: () => import('pages/Config/index.vue')
       }
     ]
   },

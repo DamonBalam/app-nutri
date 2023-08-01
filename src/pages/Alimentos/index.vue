@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <div style="width: 100%" class="q-px-xs">
-      <q-img src="../../assets/apple.png" class="apple" />
+      <q-img src="../../assets/apple_1.png" class="apple" />
       <q-input
         rounded
         class="q-ml-xl"
@@ -244,10 +244,10 @@ const itemsFilteredBySubcategory = computed(() => {
 
 <style scoped lang="scss">
 .apple {
-  width: 40px;
+  width: 100px;
   position: absolute;
   z-index: 1;
-  top: 10px;
-  left: 35px;
+  top: -15px;
+  left: -5px;
 }
 </style>

@@ -1,6 +1,6 @@
 import { route } from 'quasar/wrappers'
 import { useAuthStore } from 'stores/auth'
-import { LocalStorage, SessionStorage } from 'quasar'
+import { Cookies } from 'quasar'
 import {
   createMemoryHistory,
   createRouter,
@@ -37,8 +37,8 @@ export default route(function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach((to, from, next) => {
-    const access_token = LocalStorage.getItem('access_token')
-    const user = JSON.parse(LocalStorage.getItem('user') || '{}')
+    const access_token = Cookies.get('access_token')
+    const user = Cookies.get('user')
     const store = useAuthStore()
 
     const { setUser } = store
