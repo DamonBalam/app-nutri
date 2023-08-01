@@ -155,7 +155,7 @@ const $q = useQuasar()
 
 const store = useAuthStore()
 
-const { login, loginWithCookies } = store
+const { login } = store
 
 const myForm = ref(null)
 const myFormRecovery = ref(null)
@@ -191,12 +191,7 @@ async function handleSubmit () {
         )
 
         if (code === 200) {
-          loginWithCookies(data)
-          // if (accept.value) {
-          //   loginWithCookies(data)
-          // } else {
-          //   login(data)
-          // }
+          login(data)
         } else {
           message.value = msg || 'Error al iniciar sesión'
 

@@ -12,6 +12,7 @@
     "icons": "icongenie generate -i logo_app.png --skip-trim --theme-color ffffff "
   },
   "dependencies": {
+    "@capacitor/preferences": "^5.0.6",
     "@quasar/extras": "^1.0.0",
     "axios": "^1.2.1",
     "pinia": "^2.0.11",

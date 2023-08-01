@@ -1,6 +1,6 @@
 import { route } from 'quasar/wrappers'
 import { useAuthStore } from 'stores/auth'
-import { LocalStorage } from 'quasar'
+import { Preferences } from '@capacitor/preferences'
 import {
   createMemoryHistory,
   createRouter,
@@ -36,18 +36,17 @@ export default route(function (/* { store, ssrContext } */) {
     history: createWebHistory(process.env.VUE_ROUTER_BASE)
   })
 
-  Router.beforeEach((to, from, next) => {
-    // const access_token = Cookies.get('access_token')
-    // const user = Cookies.get('user')
-    const access_token = LocalStorage.getItem('access_token')
-    const user = JSON.parse(LocalStorage.getItem('user') || '{}')
+  Router.beforeEach(async (to, from, next) => {
+    const { value: user } = await Preferences.get({ key: 'user' })
+    const { value: token } = await Preferences.get({ key: 'access_token' })
+
     const store = useAuthStore()
 
     const { setUser } = store
 
     if (to.matched.some(record => record.meta.requiresAuth)) {
-      if (access_token != null) {
-        setUser({ user: user, token: access_token })
+      if (token != null) {
+        setUser({ user: JSON.parse(user || '{}'), token: token })
         next()
       } else {
         next({ path: '/login' })
