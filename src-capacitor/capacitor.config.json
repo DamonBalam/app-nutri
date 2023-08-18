@@ -3,5 +3,10 @@
   "appName": "Natalia Segura App",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
-  "webDir": "www"
+  "webDir": "www",
+  "plugins": {
+    "CapacitorCookies": {
+      "enabled": true
+    }
+  }
 }
