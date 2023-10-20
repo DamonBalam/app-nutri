@@ -113,6 +113,13 @@
           icon="o_format_list_bulleted"
           label="Plan"
         />
+        <q-route-tab
+          to="/contador"
+          exact
+          name="counter"
+          icon="o_control_point"
+          label="Contador"
+        />
       </q-tabs>
     </q-footer>
   </q-layout>

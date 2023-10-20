@@ -35,6 +35,11 @@ const routes: RouteRecordRaw[] = [
         path: '/update-password',
         meta: { requiresAuth: true },
         component: () => import('pages/Config/index.vue')
+      },
+      {
+        path: '/contador',
+        meta: { requiresAuth: true },
+        component: () => import('pages/Config/contador.vue')
       }
     ]
   },

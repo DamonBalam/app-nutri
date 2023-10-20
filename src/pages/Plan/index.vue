@@ -41,6 +41,16 @@
         </template>
       </q-table>
     </div>
+    <div class="q-mt-lg row justify-center">
+      <q-btn
+          label="Contador"
+          rounded
+          type="submit"
+          color="primary"
+          style="width: 200px"
+          class="q-mb-md"
+        />
+    </div>
   </q-page>
 </template>
 
