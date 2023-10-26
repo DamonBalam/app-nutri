@@ -191,6 +191,7 @@ async function handleSubmit () {
         )
 
         if (code === 200) {
+          // loginWithCookies(data)
           if (accept.value) {
             loginWithCookies(data)
           } else {

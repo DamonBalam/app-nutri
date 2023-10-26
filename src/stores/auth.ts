@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { authDataServices } from 'src/services/AuthDataService'
-import { Cookies } from 'quasar'
+import { CapacitorCookies } from '@capacitor/core'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     counter: 0,
@@ -18,18 +18,28 @@ export const useAuthStore = defineStore('auth', {
       this.user = payload.user
       this.token = payload.token
     },
-    setLocalStorage (payload: any) {
-      /* Cookies */
-      Cookies.set('user', payload.user)
-      Cookies.set('access_token', payload.token)
-    },
-    setLocalStorageWithTime (payload: any) {
-      /* Cookies */
-      Cookies.set('user', payload.user, {
-        expires: 100
+    async setLocalStorage (payload: any) {
+      // /* Cookies */
+      await CapacitorCookies.setCookie({
+        key: 'user',
+        value: payload.user
       })
-      Cookies.set('access_token', payload.token, {
-        expires: 100
+      await CapacitorCookies.setCookie({
+        key: 'access_token',
+        value: payload.token
+      })
+    },
+    async setLocalStorageWithTime (payload: any) {
+      /* Cookies */
+      await CapacitorCookies.setCookie({
+        key: 'user',
+        value: payload.user,
+        expires: '100'
+      })
+      await CapacitorCookies.setCookie({
+        key: 'access_token',
+        value: payload.token,
+        expires: '100'
       })
     },
     login (payload: any) {
@@ -50,11 +60,10 @@ export const useAuthStore = defineStore('auth', {
         console.log(error)
       }
     },
-    deleteLocalStorage () {
+    async deleteLocalStorage () {
       this.user = {}
       this.token = ''
-      Cookies.remove('user')
-      Cookies.remove('access_token')
+      await CapacitorCookies.clearAllCookies()
       this.router.push('/login')
     }
   }
