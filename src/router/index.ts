@@ -47,7 +47,10 @@ export default route(function (/* { store, ssrContext } */) {
 
     if (to.matched.some(record => record.meta.requiresAuth)) {
       if (access_token != null) {
-        setUser({ user: user.value, token: access_token.value })
+        setUser({
+          user: JSON.parse(user.value || '{}'),
+          token: access_token.value
+        })
         next()
       } else {
         next({ path: '/login' })
