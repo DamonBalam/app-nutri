@@ -11,7 +11,7 @@ class CitaControlDataService {
     try {
       response = await API.get(`show-history/cita-control/${id}`, {})
     } catch (error) {
-      deleteLocalStorage()
+      // deleteLocalStorage()
     }
 
     return response!.data

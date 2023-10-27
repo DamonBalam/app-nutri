@@ -11,7 +11,7 @@ class EqNuDataService {
     try {
       response = await API.get(`show/equivalencias-nutricionales/${id}`, {})
     } catch (error) {
-      deleteLocalStorage()
+      // deleteLocalStorage()
     }
 
     return response!.data
@@ -22,7 +22,7 @@ class EqNuDataService {
     try {
       response = await API.get(`show-last/equivalencia-nutricional/${id}`, {})
     } catch (error) {
-      deleteLocalStorage()
+      // deleteLocalStorage()
     }
 
     return response!.data
