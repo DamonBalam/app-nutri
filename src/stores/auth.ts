@@ -64,11 +64,11 @@ export const useAuthStore = defineStore('auth', {
         console.log(error)
       }
     },
-    deleteLocalStorage () {
+    async deleteLocalStorage () {
       this.user = {}
       this.token = ''
-      Cookies.remove('user')
-      Cookies.remove('access_token')
+      await Preferences.remove({ key: 'user' })
+      await Preferences.remove({ key: 'access_tokens' })
       this.router.push('/login')
     }
   }
