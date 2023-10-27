@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', {
       // /* Cookies */
       await Storage.set({
         key: 'user',
-        value: payload.user
+        value: JSON.stringify(payload.user)
       })
 
       await Storage.set({
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
       /* Cookies */
       await Storage.set({
         key: 'user',
-        value: payload.user
+        value: JSON.stringify(payload.user)
       })
 
       await Storage.set({

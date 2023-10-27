@@ -40,7 +40,7 @@ export default route(function (/* { store, ssrContext } */) {
 
   Router.beforeEach((to, from, next) => {
     const access_token = Storage.get('access_token')
-    const user = Storage.get('user')
+    const user = JSON.parse(Storage.get('user'))
     const store = useAuthStore()
 
     const { setUser } = store
