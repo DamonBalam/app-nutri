@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia'
 import { authDataServices } from 'src/services/AuthDataService'
-import { CapacitorCookies } from '@capacitor/core'
+import { Plugins } from '@capacitor/core'
+
+const { Storage } = Plugins
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     counter: 0,
@@ -20,26 +23,26 @@ export const useAuthStore = defineStore('auth', {
     },
     async setLocalStorage (payload: any) {
       // /* Cookies */
-      await CapacitorCookies.setCookie({
+      await Storage.set({
         key: 'user',
         value: payload.user
       })
-      await CapacitorCookies.setCookie({
+
+      await Storage.set({
         key: 'access_token',
         value: payload.token
       })
     },
     async setLocalStorageWithTime (payload: any) {
       /* Cookies */
-      await CapacitorCookies.setCookie({
+      await Storage.set({
         key: 'user',
-        value: payload.user,
-        expires: '100'
+        value: payload.user
       })
-      await CapacitorCookies.setCookie({
+
+      await Storage.set({
         key: 'access_token',
-        value: payload.token,
-        expires: '100'
+        value: payload.token
       })
     },
     login (payload: any) {
@@ -63,7 +66,7 @@ export const useAuthStore = defineStore('auth', {
     async deleteLocalStorage () {
       this.user = {}
       this.token = ''
-      await CapacitorCookies.clearAllCookies()
+      await Storage.clear()
       this.router.push('/login')
     }
   }

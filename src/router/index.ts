@@ -1,6 +1,7 @@
 import { route } from 'quasar/wrappers'
 import { useAuthStore } from 'stores/auth'
-import { Cookies } from 'quasar'
+import { Plugins } from '@capacitor/core'
+
 import {
   createMemoryHistory,
   createRouter,
@@ -10,6 +11,7 @@ import {
 
 import routes from './routes'
 
+const { Storage } = Plugins
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -37,8 +39,8 @@ export default route(function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach((to, from, next) => {
-    const access_token = Cookies.get('access_token')
-    const user = Cookies.get('user')
+    const access_token = Storage.get('access_token')
+    const user = Storage.get('user')
     const store = useAuthStore()
 
     const { setUser } = store
