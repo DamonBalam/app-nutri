@@ -5,10 +5,9 @@
   "npmClient": "npm",
   "webDir": "www",
   "server": {
-    "cleartext": true,
     "hostname": "localhost",
     "port": 8080,
-    "androidScheme": "http",
-    "iosScheme": "http"
+    "androidScheme": "https",
+    "iosScheme": "https"
   }
 }
