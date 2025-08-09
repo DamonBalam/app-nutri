@@ -5,6 +5,10 @@
   "npmClient": "npm",
   "webDir": "www",
   "server": {
-    "url": "https://clinika.ai"
+    "cleartext": true,
+    "hostname": "localhost",
+    "port": 8080,
+    "androidScheme": "http",
+    "iosScheme": "http"
   }
 }
