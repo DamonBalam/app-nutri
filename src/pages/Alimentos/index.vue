@@ -221,13 +221,24 @@ const getSubcategories = async (id: number) => {
   // loading.value = false
 }
 
+// Función helper para normalizar strings (remover acentos y convertir a minúsculas)
+const normalizeString = (str: string): string => {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+}
+
 const itemsFiltered = computed(() => {
   if (search.value === '') {
     return items.value
   }
 
+  const normalizedSearch = normalizeString(search.value)
+
   return items.value.filter(item => {
-    return item.nombre.toLowerCase().includes(search.value.toLowerCase())
+    const normalizedNombre = normalizeString(item.nombre)
+    return normalizedNombre.includes(normalizedSearch)
   })
 })
 

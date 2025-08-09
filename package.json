@@ -12,6 +12,7 @@
     "icons": "icongenie generate -i logo_app.png --skip-trim --theme-color ffffff "
   },
   "dependencies": {
+    "@capacitor/preferences": "^7.0.2",
     "@quasar/extras": "^1.0.0",
     "axios": "^1.2.1",
     "pinia": "^2.0.11",
@@ -33,7 +34,7 @@
     "workbox-strategies": "^6.5.0"
   },
   "engines": {
-    "node": "^18 || ^16 || ^14.19",
+    "node": "^20 || ^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   }
