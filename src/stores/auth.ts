@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { authDataServices } from 'src/services/AuthDataService'
-import { LocalStorage, SessionStorage } from 'quasar'
+// import { Cookies } from 'quasar'
+import { Preferences } from '@capacitor/preferences'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     counter: 0,
@@ -18,26 +19,57 @@ export const useAuthStore = defineStore('auth', {
       this.user = payload.user
       this.token = payload.token
     },
-    setLocalStorage (payload: any) {
-      LocalStorage.set('user', JSON.stringify(payload.user))
-      LocalStorage.set('access_token', payload.token)
+    async setLocalStorage (payload: any) {
+      /* Cookies */
+      // Cookies.set('user', payload.user)
+      // Cookies.set('access_token', payload.token)
+
+      await Preferences.set({
+        key: 'user',
+        value: JSON.stringify(payload.user)
+      })
+
+      await Preferences.set({
+        key: 'access_token',
+        value: payload.token
+      })
+    },
+    async setLocalStorageWithTime (payload: any) {
+      /* Cookies */
+      await Preferences.set({
+        key: 'user',
+        value: JSON.stringify(payload.user)
+      })
+
+      await Preferences.set({
+        key: 'access_token',
+        value: payload.token
+      })
     },
     login (payload: any) {
       this.setUser(payload)
       this.setLocalStorage(payload)
       this.router.push('/perfil')
     },
+    loginWithCookies (payload: any) {
+      this.setUser(payload)
+      this.setLocalStorageWithTime(payload)
+      this.router.push('/perfil')
+    },
     async logout () {
       try {
         await authDataServices.logout()
-        this.user = {}
-        this.token = ''
-        LocalStorage.remove('user')
-        LocalStorage.remove('access_token')
-        this.router.push('/login')
+        this.deleteLocalStorage()
       } catch (error) {
         console.log(error)
       }
+    },
+    async deleteLocalStorage () {
+      this.user = {}
+      this.token = ''
+      await Preferences.remove({ key: 'user' })
+      await Preferences.remove({ key: 'access_tokens' })
+      this.router.push('/login')
     }
   }
 })

@@ -23,6 +23,11 @@ class AuthDataService {
     let response = await API.post('recover/password', { data: { email } })
     return response
   }
+
+  async updatePassword (email: string, password:string): Promise<IResponse<any>> {
+    let response = await API.post('recover/custom-password', { data: { email, password } })
+    return response
+  }
 }
 
 export const authDataServices = new AuthDataService()

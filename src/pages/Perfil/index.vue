@@ -123,8 +123,10 @@ const rows = ref([])
 
 onMounted(async () => {
   const data = await citaControlDataServices.getAll(getUser.id)
-  console.log(data)
-  rows.value = data.data
-  cita.value = data.data[0]
+
+  if (data.code === 200) {
+    rows.value = data.data
+    cita.value = data.data[0]
+  }
 })
 </script>

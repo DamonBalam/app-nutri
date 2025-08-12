@@ -2,6 +2,12 @@
   "appId": "org.capacitor.quasar.app",
   "appName": "Natalia Segura App",
   "bundledWebRuntime": false,
-  "npmClient": "yarn",
-  "webDir": "www"
+  "npmClient": "npm",
+  "webDir": "www",
+  "server": {
+    "hostname": "localhost",
+    "port": 3000,
+    "androidScheme": "https",
+    "iosScheme": "https"
+  }
 }

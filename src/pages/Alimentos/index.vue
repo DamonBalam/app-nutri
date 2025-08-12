@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <div style="width: 100%" class="q-px-xs">
-      <q-img src="../../assets/apple.png" class="apple" />
+      <q-img src="../../assets/apple_1.png" class="apple" />
       <q-input
         rounded
         class="q-ml-xl"
@@ -30,6 +30,7 @@
               >{{ item.cantidad_producto }} =
               {{ item.intercambio_nutricional }}</q-item-label
             >
+            <q-item-label caption>{{ item.detalles_adicionales }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -89,6 +90,9 @@
                     >{{ item.cantidad_producto }} =
                     {{ item.intercambio_nutricional }}</q-item-label
                   >
+                  <q-item-label caption>{{
+                    item.detalles_adicionales
+                  }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -136,7 +140,7 @@ const colors = [
   '#EE890B',
   '#339933',
   '#4195F1',
-  '#E60026',
+  '#E60026'
 ]
 const items = ref<IProducto[]>([])
 const categories = ref<ICategory[]>([])
@@ -217,13 +221,24 @@ const getSubcategories = async (id: number) => {
   // loading.value = false
 }
 
+// Función helper para normalizar strings (remover acentos y convertir a minúsculas)
+const normalizeString = (str: string): string => {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+}
+
 const itemsFiltered = computed(() => {
   if (search.value === '') {
     return items.value
   }
 
+  const normalizedSearch = normalizeString(search.value)
+
   return items.value.filter(item => {
-    return item.nombre.toLowerCase().includes(search.value.toLowerCase())
+    const normalizedNombre = normalizeString(item.nombre)
+    return normalizedNombre.includes(normalizedSearch)
   })
 })
 
@@ -240,10 +255,10 @@ const itemsFilteredBySubcategory = computed(() => {
 
 <style scoped lang="scss">
 .apple {
-  width: 40px;
+  width: 100px;
   position: absolute;
   z-index: 1;
-  top: 10px;
-  left: 35px;
+  top: -15px;
+  left: -5px;
 }
 </style>
