@@ -6,7 +6,7 @@
   "webDir": "www",
   "server": {
     "hostname": "localhost",
-    "port": 8080,
+    "port": 3000,
     "androidScheme": "https",
     "iosScheme": "https"
   }
