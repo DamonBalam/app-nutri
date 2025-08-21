@@ -42,6 +42,11 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/ios@^7.4.3":
+  version "7.4.3"
+  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-7.4.3.tgz"
+  integrity sha512-VNm7cHODgh3KK/4ZC2rXU9gBlvHii/mYFLI+XMXwq24nhB679QxHhz+pUuI7PatYoM2q4MAL0NR/dRgehKCaSA==
+
 "@capacitor/preferences@^7.0.0":
   version "7.0.2"
   resolved "https://registry.npmjs.org/@capacitor/preferences/-/preferences-7.0.2.tgz"
