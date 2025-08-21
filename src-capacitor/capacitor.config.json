@@ -5,7 +5,7 @@
   "npmClient": "npm",
   "webDir": "www",
   "server": {
-    "hostname": "localhost",
+    "hostname": "nutrimind.ai",
     "port": 8080,
     "androidScheme": "https",
     "iosScheme": "https"
