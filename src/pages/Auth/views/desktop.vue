@@ -100,7 +100,7 @@ function handleClick () {
       style="height: 95vh; padding: 20px; border-radius: 40px"
     >
       <div class="row justify-end q-mx-md q-mt-lg">
-        <q-img src="../../../assets/Logo.png" width="200px" />
+        <q-img src="../../../assets/logo.png" width="200px" />
       </div>
 
       <div

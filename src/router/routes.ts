@@ -4,7 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     component: () => import('layouts/AuthLayout.vue'),
-    children: [{ path: '', name: 'Login', component: () => import('pages/Auth/Index.vue') }]
+    children: [{ path: '', name: 'Login', component: () => import('pages/Auth/index.vue') }]
   },
   {
     path: '/',
