@@ -1,4 +1,4 @@
-package org.nutrimind.app;
+package com.nataliasegura.nutrimind;
 
 import com.getcapacitor.BridgeActivity;
 

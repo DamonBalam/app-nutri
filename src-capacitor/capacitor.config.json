@@ -1,5 +1,5 @@
 {
-  "appId": "org.nutrimind.app",
+  "appId": "com.nataliasegura.nutrimind",
   "appName": "Natalia Segura App",
   "bundledWebRuntime": false,
   "npmClient": "npm",

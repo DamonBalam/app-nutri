@@ -7,10 +7,10 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "org.nutrimind.app"
+    namespace "com.nataliasegura.nutrimind"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "org.nutrimind.app"
+        applicationId "com.nataliasegura.nutrimind"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
