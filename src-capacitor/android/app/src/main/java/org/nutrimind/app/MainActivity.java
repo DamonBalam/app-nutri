@@ -1,4 +1,4 @@
-package org.capacitor.quasar.app;
+package org.nutrimind.app;
 
 import com.getcapacitor.BridgeActivity;
 
